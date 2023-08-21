@@ -30,23 +30,17 @@ sr.reveal('.sub-service,.about,.portfolio,.service,.cta,.contact',{delay:200, or
 
 
 function handleGetFormData() {
-    const name = document.getElementById('name').value;
-    const city = document.getElementById('city').value;
-    const email = document.getElementById('email').value;
-    const zipCode = document.getElementById('zip-code').value;
-    const status = document.getElementById('status').checked;
+    const name = document.getElementById("name").value;
+    const city = document.getElementById("city").value;
+    const email = document.getElementById("email").value;
+    const zipCode = document.getElementById("zip-code").value;
+    const status = document.getElementById("status").checked;
 
-    return {
-        name: name,
-        city: city,
-        email: email,
-        zipCode: zipCode,
-        status: status
-    };
+    return { name, city, email, zipCode, status };
 }
 
-function isNumber(str) {
-    return !isNaN(str);
+function isNumber(input) {
+    return !isNaN(input);
 }
 
 function checkboxIsChecked() {
@@ -54,18 +48,11 @@ function checkboxIsChecked() {
 }
 
 function validateFormData(data) {
-    return (
-        data !== null &&
-        isNumber(data.zipCode) &&
-        checkboxIsChecked()
-    );
+    return data !== null && isNumber(data.zipCode) && data.status;
 }
 
-function submit() {
-    document.getElementById('forms').addEventListener('submit', (event) => {
-        event.preventDefault();
-        submit()
-    })
+function submit(event) {
+    event.preventDefault();
 
     const formData = handleGetFormData();
 
@@ -77,6 +64,9 @@ function submit() {
 
     warningDiv.textContent = "";
 }
+
+const form = document.getElementById("submit-form");
+form.addEventListener("submit", submit);
 
 
 let mybutton = document.getElementById("myBtn");
